@@ -18,7 +18,7 @@ UserLogin.prototype.checkUser = function(callback) {
         if (docs.length < 1) {
             result.ret = false;
             result.errinfo = '没用该用户！';
-        }else if (docs.password !== request.body.iori) {
+        }else if (docs[0].passwd !== request.body.iori) {
             result.ret = false;
             result.errinfo = '密码错误';
         }
