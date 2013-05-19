@@ -1,7 +1,7 @@
 var mongodb = require('mongodb');
 
 var server = new mongodb.Server("127.0.0.1", 27017, {});
-var client = new mongodb.Db('admin', server, {});
+var client = new mongodb.Db('sshdb', server, {});
 
 var request, response, result;
 function UserLogin() {}
@@ -30,8 +30,9 @@ UserLogin.prototype.checkUser = function(callback) {
 UserLogin.prototype.findUser = function(callback) {
     client.open(function (error, client) {
         if (error) throw error;
-        var collection = new mongodb.Collection(client, 'sshdb');
+        var collection = new mongodb.Collection(client, 'useradmin');
         var username = request.body.kusanagi;
+        console.log(username);
         collection.find({user: username}).toArray(function(err, docs) {
             callback(docs);
         });
