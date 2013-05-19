@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>管理登录-TTS代理商系统</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="styles/login.css" rel="stylesheet" media="screen">
+    </head>
+
+    <body>
+        <div class="container">
+            <form class="form-signin" method="post" action="/node/login">
+                <h2 class="form-signin-heading">管理员登录</h2>
+                <label>用户名：</label>
+                <input type="text" class="input-block-level" name="kusanagi" placeholder="用户名">
+                <label>密码：</label>
+                <input type="password" class="input-block-level" name="iori" placeholder="密码">
+                <label>验证码：</label>
+                <input type="text" class="span2" name="maxma" placeholder="验证码">
+                <span class="add-on"><img src="/node/kaptcha" class="kaptcha" align="absmiddle"></span>
+                <button class="btn btn-large btn-primary" type="submit">登录</button>
+                <hr />
+                <div class="alert alert-error hide" id="js_login_info" >
+                    <strong>错误!</strong><span id="js_login_errmsg"></span>
+                </div>
+            </form>
+        </div> <!-- /container -->
+    </body>
+</html>
