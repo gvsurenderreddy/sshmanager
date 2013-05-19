@@ -14,23 +14,29 @@ UserLogin.prototype.checkVcode = function() {
 };
 
 UserLogin.prototype.checkUser = function(callback) {
+    this.findUser(function(docs) {
+        if (docs.length < 1) {
+            result.ret = false;
+            result.errinfo = '没用该用户！';
+        }else if (docs.password !== request.body.iori) {
+            result.ret = false;
+            result.errinfo = '密码错误';
+        }
+        callback();
+        client.close();
+    });
+};
+
+UserLogin.prototype.findUser = function(callback) {
     client.open(function (error, client) {
         if (error) throw error;
         var collection = new mongodb.Collection(client, 'sshdb');
         var username = request.body.kusanagi;
         collection.find({user: username}).toArray(function(err, docs) {
-            if (docs.length < 1) {
-                result.ret = false;
-                result.errinfo = '没用该用户！';
-            }else if (docs.password !== request.body.iori) {
-                result.ret = false;
-                result.errinfo = '密码错误';
-            }
-            callback();
-            client.close();
+            callback(docs);
         });
     });
-};
+}
 
 var userLogin = new UserLogin();
 
